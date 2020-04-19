@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MyGameManager : MonoBehaviour
 {
     [Header("general")]
     public Camera mainCamera;
+    public PlayerMovement snakeHead;
+    public List<Transform> snakeBody;
 
     [Header("Pickups Settings")]
     public GameObject[] pickUps;
@@ -15,6 +18,7 @@ public class MyGameManager : MonoBehaviour
     float screenWidth;
 
     PickUpController currentPickup;
+    Vector3 headLastPosition;
     //Coroutine infinitLoop;
     void Start()
     {
@@ -23,6 +27,16 @@ public class MyGameManager : MonoBehaviour
         pickupNumber = pickUps.Length;
         GenerateRandomPickUp();
         //infinitLoop = StartCoroutine("timer");
+    }
+
+    private void FixedUpdate()
+    {
+        if (snakeHead.transform.position != headLastPosition)
+        {
+            snakeBody[snakeBody.Count - 1].transform.position = headLastPosition;
+            snakeBody.Insert(0, snakeBody[snakeBody.Count - 1]);
+            snakeBody.RemoveAt(snakeBody.Count - 1);
+        }
     }
 
     //private void OnDestroy()

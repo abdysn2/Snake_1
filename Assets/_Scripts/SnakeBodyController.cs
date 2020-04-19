@@ -1,59 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class SnakeBodyController : PlayerMovement
 {
-    public float speed = 1f;
-
-    private Rigidbody2D myRB;
-
-    // Start is called before the first frame update
+    Rigidbody2D myRB2;
     void Start()
     {
-        myRB = GetComponent<Rigidbody2D>();
+        myRB2 = GetComponent<Rigidbody2D>();
         ChangeDirection("right");
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    public virtual void ChangeDirection(string direction)
+    public override void ChangeDirection(string direction)
     {
         switch (direction)
         {
             case "up":
             case "Up":
             case "UP":
-                myRB.velocity = speed * Vector2.up;
+                myRB2.velocity = speed * Vector2.up;
                 break;
             case "down":
             case "Down":
             case "DOWN":
-                myRB.velocity = speed * Vector2.down;
+                myRB2.velocity = speed * Vector2.down;
                 break;
             case "right":
             case "Right":
             case "RIGHT":
-                myRB.velocity = speed * Vector2.right;
+                myRB2.velocity = speed * Vector2.right;
                 break;
             case "left":
             case "Left":
             case "LEFT":
-                myRB.velocity = speed * Vector2.left;
-                break;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        switch (collision.tag)
-        {
-            case "Pickup":
+                myRB2.velocity = speed * Vector2.left;
                 break;
         }
     }
