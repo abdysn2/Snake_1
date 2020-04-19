@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public MyGameManager MyGameManager;
     public float speed = 1;
 
     private Rigidbody2D myRB;
@@ -45,6 +46,15 @@ public class PlayerMovement : MonoBehaviour
             case "Left":
             case "LEFT":
                 myRB.velocity = speed * Vector2.left;
+                break;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case "Pickup":
                 break;
         }
     }
